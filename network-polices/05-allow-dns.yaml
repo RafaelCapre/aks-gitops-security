@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-dns
+  namespace: app-team
+spec:
+  podSelector: {}
+  policyTypes:
+  - Egress
+  egress:
+  - to:
+    - ipBlock:
+        cidr: 10.0.0.10/32  # IP do DNS interno do AKS (verifique o correto no seu cluster)
+    ports:
+    - protocol: UDP
+      port: 53
+

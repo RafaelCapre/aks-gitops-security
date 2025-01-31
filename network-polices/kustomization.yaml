@@ -4,4 +4,6 @@ resources:
 - 01-default-deny-all.yaml
 - 02-allow-app-namespace.yaml
 - 03-restrict-external-traffic.yaml
+- 04-whitelist-external-traffic.yaml
+- 05-allow-dns.yaml
 

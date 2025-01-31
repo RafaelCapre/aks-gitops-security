@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: whitelist-external-traffic
+  namespace: app-team
+spec:
+  podSelector: {}
+  policyTypes:
+  - Egress
+  egress:
+  - to:
+    - ipBlock:
+        cidr: 192.168.10.100/32  # Banco de dados externo
+    ports:
+    - protocol: TCP
+      port: 5432  # Exemplo: PostgreSQL
+  - to:
+    - ipBlock:
+        cidr: 203.0.113.50/32  # API de autenticação externa
+    ports:
+    - protocol: TCP
+      port: 443  # HTTPS
+  - to:
+    - ipBlock:
+        cidr: 198.51.100.0/24  # SaaS externo permitido
+    ports:
+    - protocol: TCP
+      port: 443  # HTTPS
+
